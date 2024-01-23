@@ -1,0 +1,256 @@
+:root {
+  --primary: #2c64e3;
+  --white: #fff;
+  --gray-one: #f3f3f3;
+  --gray-two: #858585;
+  --secondary: #171717;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url(./assets/fonts/Gilroy-ExtraBold.otf);
+}
+
+@font-face {
+  font-family: "Gilroy-light";
+  src: url(./assets/fonts/Gilroy-Light.otf);
+}
+
+html,
+body,
+*::after,
+*::before,
+p,
+div,
+nav,
+a {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Gilroy", sans-serif;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  position: relative;
+  height: 100vh;
+}
+
+/* Utility classes START */
+.hidden {
+  display: none;
+}
+.w-6 {
+  width: 2rem;
+}
+.h-6 {
+  height: 1.4rem;
+}
+
+.level {
+  display: flex;
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin-top: 3rem;
+}
+
+.level-two {
+  background-color: var(--white);
+  position: absolute;
+  margin: 0;
+  padding-inline: 1.5rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80%;
+  list-style: none;
+  font-size: 50%;
+}
+.level-two li {
+  display: flex;
+  justify-content: space-between;
+}
+.level-two li:not(:first-child) {
+  margin-top: 3rem;
+}
+.title-item {
+  color: var(--gray-two);
+  cursor: default;
+}
+
+/* Utility classes END */
+
+div[role="banner"] {
+  position: fixed;
+  bottom: 0;
+  background-color: var(--primary);
+  color: var(--white);
+
+  padding: 2rem;
+  font: 1.1rem "Gilroy-light", sans-serif;
+  font-weight: bold;
+  line-height: 1.8rem;
+
+  border-radius: 25px;
+  margin: 1rem;
+}
+
+div[role="banner"] a {
+  text-decoration: none;
+}
+
+.banner-text {
+  color: #d1d1d1;
+}
+.banner-text > u {
+  color: var(--white);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1.2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: "Gilroy-light", sans-serif;
+}
+#logo {
+  text-decoration: none;
+  color: var(--secondary);
+  font-size: 120%;
+}
+.menu-icon {
+  width: 10%;
+  background: none;
+  outline: 0;
+  border: 0;
+  padding: 0.6rem;
+  cursor: pointer;
+}
+.menu-icon > span {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  height: 2px;
+  background: var(--secondary);
+  display: inline-block;
+}
+.menu-icon > span::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: var(--secondary);
+  margin-top: 10px;
+
+  top: 20%;
+  left: 0;
+}
+
+.nav-list {
+  position: absolute;
+  inset: 0 0 0 0;
+  height: 100%;
+  background: var(--white);
+  z-index: 2;
+  margin: 0;
+
+  list-style: none;
+}
+.back {
+  font-size: 3.5rem;
+  font-family: "Gilroy-light", sans-serif;
+  border: 0;
+  background-color: var(--white);
+  cursor: pointer;
+  margin-top: 10px;
+  z-index: 99;
+  padding: 0;
+  margin-left: -3%;
+}
+
+.close {
+  float: right;
+  font-size: 3.5rem;
+  font-family: "Gilroy-light", sans-serif;
+  border: 0;
+  background-color: var(--white);
+  cursor: pointer;
+  padding-inline: 1rem;
+  margin-top: 10px;
+  z-index: 99;
+}
+
+#first {
+  margin-top: 8rem;
+}
+.auth {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.auth button {
+  font-family: "Gilroy", sans-serif;
+  margin: 0.6em 0;
+  border-radius: 25px;
+  font-size: 0.8em;
+  height: 60px;
+  outline: 0;
+  background: var(--primary);
+  border: 0;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.auth button:last-child {
+  color: var(--primary);
+  background: var(--white);
+  border: 1px solid var(--gray-two);
+}
+
+.card {
+  border-radius: 40px;
+  background: var(--secondary);
+  color: var(--white);
+  position: relative;
+}
+.card:not(.chat) {
+  padding: 2rem;
+}
+.card > p {
+  color: var(--gray-two);
+}
+.card > p + div {
+  margin: 1.2rem 0;
+  display: flex;
+  cursor: pointer;
+}
+.card > p + div:hover {
+  opacity: 80%;
+  transition: opacity 100ms ease-in-out;
+}
+.card > p + div p {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.chat {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  right: 3%;
+  top: 5%;
+  background: var(--white);
+  color: var(--secondary);
+  border-radius: 50%;
+  text-align: center;
+}
+.chat svg {
+  height: 60px;
+  aspect-ratio: 1;
+}
