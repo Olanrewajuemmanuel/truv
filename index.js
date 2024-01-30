@@ -1,5 +1,6 @@
 const menuBtn = document.querySelector(".menu-icon");
-const navList = document.querySelector("ul.nav-list");
+const nav = document.querySelector("nav");
+const navList = document.querySelector("ul.nav-list--mobile");
 const navCloseBtn = document.querySelector(".close");
 const navBackBtn = document.querySelector(".back");
 const levelOneLists = document.querySelectorAll(".level-one");
@@ -8,6 +9,18 @@ const listsLevelTwoLi = document.getElementsByClassName("level-two-li");
 
 let isMenuOpen = false;
 var menuLeveLTracker = 0;
+
+let currentPosition = window.scrollY;
+window.onscroll = function (e) {
+  e.preventDefault();
+  if (window.scrollY > 100 && window.scrollY > currentPosition) {
+    console.log(currentPosition);
+    nav.classList.add("nav-hide");
+  } else {
+    nav.classList.remove("nav-hide");
+  }
+  currentPosition = window.scrollY;
+};
 
 menuBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -31,14 +44,14 @@ menuBtn.addEventListener("click", (e) => {
 
 navBackBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  if (menuLeveLTracker === 1) {
+  if (menuLeveLTracker <= 1) {
     // Second level
     levelOneLists.forEach((levelOne) => {
       if (!levelOne.querySelector("ul.level-two").hidden)
         levelOne.querySelector("ul.level-two").hidden = true;
     });
     navBackBtn.classList.toggle("hidden"); // Hide navBack button
-  } else if (menuLeveLTracker === 2) {
+  } else if (menuLeveLTracker >= 2) {
     // Third level
     Array.from(listsLevelTwoLi).forEach((list) => {
       const levelThree = list.querySelector("ul.level-three");
@@ -49,13 +62,11 @@ navBackBtn.addEventListener("click", (e) => {
   }
 
   menuLeveLTracker--;
-  console.log(menuLeveLTracker);
 });
 
 levelOneLists.forEach((level) => {
   level.onclick = function (e) {
     e.preventDefault();
-    console.log(menuLeveLTracker);
     const levelTwo = level.querySelector("ul.level-two");
     if (menuLeveLTracker < 1) {
       if (levelTwo) {
@@ -73,7 +84,6 @@ Array.from(listsLevelTwoLi).forEach((levelTwoList) => {
     e.preventDefault();
 
     const levelThree = levelTwoList.querySelector("ul.level-three");
-    console.log(levelThree);
     if (levelThree) {
       levelThree.hidden = false;
       menuLeveLTracker++;
