@@ -1,5 +1,6 @@
 const menuBtn = document.querySelector(".menu-icon");
 const nav = document.querySelector("nav");
+const banner = document.querySelector("div[role='banner']");
 const navList = document.querySelector("ul.nav-list--mobile");
 const navCloseBtn = document.querySelector(".close");
 const navBackBtn = document.querySelector(".back");
@@ -25,6 +26,7 @@ window.onscroll = function (e) {
 menuBtn.addEventListener("click", (e) => {
   e.preventDefault();
   navList.classList.toggle("hidden");
+  banner.classList.toggle("hidden");
   menuBtn.classList.toggle("menu-open");
   document.body.classList.toggle("no-scroll");
   if (menuLeveLTracker > 0) {
@@ -91,3 +93,119 @@ Array.from(listsLevelTwoLi).forEach((levelTwoList) => {
     }
   };
 });
+
+/*
+ * Drop down code
+ */
+/**
+ * income, verification, deposit, linked-loans
+ */
+const previewInfo = {
+  income: {
+    dropCard: {
+      color: "invert-primary",
+      title: "simplify income and employment verification",
+    },
+    dropInfo: [
+      {
+        subtitle: "Payroll Income and Employment",
+        text: "The data you need to make informed decisions",
+      },
+    ],
+  },
+  verification: {
+    dropCard: {
+      color: "invert-light-green",
+      title: "automate home and auto insurance",
+    },
+    dropInfo: [
+      {
+        subtitle: "Home Insurance",
+        text: "Reduce time to close by automating home insurance verification for mortgage loans",
+      },
+      {
+        subtitle: "Auto Insurance",
+
+        text: "Reduce time to close by automating auto insurance verification for auto loans",
+      },
+    ],
+  },
+  deposit: {
+    dropCard: {
+      color: "",
+      title: "Grow deposits and cultivate engaged customers",
+    },
+    dropInfo: null,
+  },
+  linkedLoans: {
+    dropCard: {
+      color: "invert-light-green",
+      title: "reduce link through pay-checked loans",
+    },
+    dropInfo: null,
+  },
+};
+function passPreviewText(event, eventName) {
+  const dropCard = document.querySelector(".drop-card");
+  const sampleTitle = document.querySelector(".drop-card h3");
+  const dropLevelFirst = document.querySelector(
+    ".drop-level-one .list-display"
+  );
+  const dropInformationElem = document.querySelector(".drop-information");
+  let displayInfo = {};
+  switch (eventName) {
+    case "income":
+      displayInfo = previewInfo["income"];
+      break;
+    case "verification":
+      displayInfo = previewInfo["verification"];
+      break;
+    case "deposit":
+      displayInfo = previewInfo["deposit"];
+      break;
+    case "linked-loans":
+      displayInfo = previewInfo["linkedLoans"];
+      break;
+    default:
+      break;
+  }
+  if (event.target.tagName === "a") {
+    // First elem should be focused
+    dropLevelFirst.focus();
+  }
+  sampleTitle.innerHTML = displayInfo.dropCard.title;
+  dropCard.classList.remove("invert-primary");
+  dropCard.classList.remove("invert-light-green");
+  dropCard.classList.add(displayInfo.dropCard.color); // Add color
+
+  if (displayInfo.dropInfo) {
+    // Clear
+    dropInformationElem.hidden = false;
+    dropInformationElem.innerHTML = null;
+
+    let title = document.createElement("p");
+    title.classList.add("title-item");
+    title.innerHTML = `${
+      displayInfo.dropInfo.length > 1 ? "Products" : "Product"
+    }`;
+
+    dropInformationElem.appendChild(title);
+
+    displayInfo.dropInfo.forEach((info, index) => {
+      let container = document.createElement("div");
+      container.classList.add("information-card");
+      let subtitle = document.createElement("h3");
+      let text = document.createElement("p");
+
+      subtitle.innerHTML = info.subtitle;
+      text.innerHTML = info.text;
+
+      container.appendChild(subtitle);
+      container.appendChild(text);
+
+      dropInformationElem.appendChild(container);
+    });
+  } else {
+    dropInformationElem.hidden = true;
+  }
+}
